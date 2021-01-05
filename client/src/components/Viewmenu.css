@@ -1,0 +1,23 @@
+.menu-item {
+    background-color: rgba(150, 163, 120, 0.5);
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 90px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+.menu-title {
+    color: rgb(218, 221, 219);
+    font-size: 26px;
+}
+.menu-date {
+    color: rgb(236, 229, 229);
+    font-size: 14px;
+}
+.navlink-menu {
+    text-decoration: none;
+}
+.navlink-menu:hover {
+    text-decoration: none;
+}
