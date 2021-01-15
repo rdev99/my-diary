@@ -1,15 +1,32 @@
 import { useState } from 'react';
+import axios from 'axios';
 import './Register.css';
 
 function Register(...props) {
-    console.log(props[0].login);
+    // console.log(props[0].login);
     const [username,setusername] = useState('');
     const [name,setname] = useState('');
     const [diary,setdiary] = useState('');
     const [password,setpassword] = useState('');
     const [repassword,setrepassword] = useState('');
     function register() {
-        props[0].login('rdev');
+        if(password===repassword)
+        {
+            axios.post('http://localhost:5000/signup',{
+                usrname : username,
+                name : name,
+                diaryname : diary,
+                password : password
+            }).then(function(response) {
+                console.log(response);
+                if(response.data==='Registered')
+                {
+                    props[0].login(username);
+                }
+            }).catch(err => {
+                console.log(err);
+            })
+        }
     }
     return (
         <>

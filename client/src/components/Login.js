@@ -1,13 +1,24 @@
 import { useState } from 'react';
+import axios from 'axios';
 import './Login.css';
 function Login(...props) {
     const [loginid,setloginid] = useState('');
     const [password,setpassword] = useState('');
     // console.log(props[0].login);
     function login() {
-        // console.log(loginid);
-        // console.log(password);
-        props[0].login('rdev');
+        axios.post('http://localhost:5000/login',{
+            usrname : loginid,
+            password : password
+        }).then(function(response) {
+            console.log(response);
+            if(response.data==='Login')
+            {
+                props[0].login(loginid);
+            }
+        }).catch(err => {
+            console.log(err);
+        })
+        // props[0].login('rdev');
     }
     return ( 
         <div className="login">
