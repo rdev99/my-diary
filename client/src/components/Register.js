@@ -18,7 +18,7 @@ function Register(...props) {
                 diaryname : diary,
                 password : password
             }).then(function(response) {
-                console.log(response);
+                // console.log(response);
                 if(response.data==='Registered')
                 {
                     props[0].login(username);
@@ -26,6 +26,10 @@ function Register(...props) {
             }).catch(err => {
                 console.log(err);
             })
+        }
+        else
+        {
+            alert("Passwords don't match");
         }
     }
     return (

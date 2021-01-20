@@ -6,18 +6,29 @@ function Login(...props) {
     const [password,setpassword] = useState('');
     // console.log(props[0].login);
     function login() {
-        axios.post('http://localhost:5000/login',{
-            usrname : loginid,
-            password : password
-        }).then(function(response) {
-            console.log(response);
-            if(response.data==='Login')
-            {
-                props[0].login(loginid);
-            }
-        }).catch(err => {
-            console.log(err);
-        })
+        if(password === '')
+        {
+            alert('Please Enter Password');
+        }
+        else
+        {
+            axios.post('http://localhost:5000/login',{
+                usrname : loginid,
+                password : password
+            }).then(function(response) {
+                // console.log(response);
+                if(response.data==='Login')
+                {
+                    props[0].login(loginid);
+                }
+                else
+                {
+                    alert('Incorrect Login id and Password');
+                }
+            }).catch(err => {
+                console.log(err);
+            })
+        }
         // props[0].login('rdev');
     }
     return ( 

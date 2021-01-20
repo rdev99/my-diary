@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const login = require('./routes/login');
+const diary = require('./routes/diary');
 
 
 const app = express();
@@ -20,6 +21,7 @@ mongoose.connect(db,{useNewUrlParser : true,useUnifiedTopology : true})
     .catch(err => console.log(err));
 
 app.use('/',login);
+app.use('/',diary);
 
 
 

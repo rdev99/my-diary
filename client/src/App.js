@@ -12,15 +12,17 @@ import Register from './components/Register';
 
 
 
-function Activelogin() {
+function Activelogin(...props) {
+  const [data,setdata]=useState({});
+  
   return (
     <Router>
         <Navbar/>
         <Switch>
-          <Route path="/" exact component={Home}></Route>
-          <Route path="/create" component={Newentry}></Route>
-          <Route path="/view" exact component={Viewmenu}></Route>
-          <Route path="/view/:id" component={Viewentry}></Route>
+          <Route path="/" exact><Home user={props[0].user}></Home></Route>
+          <Route path="/create"><Newentry user={props[0].user}></Newentry></Route>
+          <Route path="/view" exact><Viewmenu user={props[0].user}></Viewmenu></Route>
+          <Route path="/view/:id"><Viewentry user={props[0].user}></Viewentry></Route>
           <Redirect to="/"></Redirect>
         </Switch>
       </Router>
@@ -51,14 +53,13 @@ function App() {
     setuserid(prev => {
       return user;
     });
-    // console.log(userid);
   }
 
   if(login)
   {
     return (
       <div className="app">
-          <Activelogin/>
+          <Activelogin user={userid}/>
       </div>
     );
   }
