@@ -9,7 +9,7 @@ router.post('/login',async (req,res) => {
         Diary.find({'usrname' : req.body.usrname}, async (err,data) => {
             if(data.length==0)
             {
-                res.send("Wrong username");
+                res.status(404).send("Wrong username");
             }
             else
             {
@@ -20,11 +20,11 @@ router.post('/login',async (req,res) => {
                     }
                     if(rs)
                     {
-                        res.status(200).send("Login");
+                        res.status(200).send(data[0]);
                     }
                     else
                     {
-                        res.status(200).send("Incorrect");
+                        res.status(404).send("Incorrect Password");
                     }
                 });
             }
@@ -58,7 +58,7 @@ router.post('/signup',async (req,res) => {
                     diaryname : req.body.diaryname,
                     password : hashedPassword
                 });
-                newDiary.save().then(diary => res.send('Registered'));
+                newDiary.save().then(diary => res.status(201).send(diary))
             }
         })
     }
