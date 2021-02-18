@@ -1,9 +1,6 @@
 import {NavLink} from 'react-router-dom';
+import moment from 'moment';
 import './Viewmenu.css'
-
-function hello() {
-    console.log('Hello World');
-}
 
 function Menuitem(...props) {
     let id=props[0].id;
@@ -12,20 +9,25 @@ function Menuitem(...props) {
         <div>
             <NavLink className="navlink-menu" to={viewid}>
                 <div className="menu-item">
-                    <div className="menu-title" onClick={hello}>Hola Everyone</div>
-                    <div className="menu-date">6-Jan-2020</div>
+                    <div className="menu-title">{props[0].data.diaryentry[id].title}</div>
+                    <div className="menu-date">{moment(props[0].data.diaryentry[id].date).fromNow()}</div>
                 </div>
             </NavLink>
         </div>
     )
 }
 
-function Viewmenu() {
+function Viewmenu(...props) {
+    let data=props[0].data.data;
+    let items=[];
+    for(let i=0;i<data.diaryentry.length;i++)
+    {
+        items.push(<Menuitem id={i} data={data} ></Menuitem>)
+    }
     return (
         <div className="viewmenu">
             <div className="menu">
-                <Menuitem id="122655"/>
-                <Menuitem id="1226655"/>
+                {items}
             </div>
         </div>
     )

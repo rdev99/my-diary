@@ -1,14 +1,17 @@
 import './Viewentry.css';
+import {useParams} from 'react-router-dom';
+import moment from 'moment';
 
 
-function Viewentry() {
+function Viewentry(...props) {
+    let {id} = useParams();
     return (
         <div>
             
             <div className="viewentry">
-                <div className="view-title">Hello everybody</div>
-                <div className="view-date">06-Jan-2021</div>
-                <div className="view-data">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Suscipit adipiscing bibendum est ultricies integer quis auctor. Porta nibh venenatis cras sed felis eget velit aliquet sagittis. Nullam eget felis eget nunc lobortis mattis aliquam faucibus purus. Non enim praesent elementum facilisis leHello my nams is devesh ranjan and i am a very good boy and swapnil is a very bad boy and a very bad boy i cant tell how much bad he is he is bad and thats truth o vel fringilla est. Eu tincidunt tortor aliquam nulla facilisi. Ligula ullamcorper malesuada proin libero nunc consequat interdum varius sit. Senectus et netus et malesuada fames ac turpis. Interdum velit laoreet id donec ultrices tincidunt arcu non. Et odio pellentesque diam volutpat commodo sed egestas egestas. Cursus sit amet dictum sit amet justo donec. Velit aliquet sagittis id consectetur. Urna cursus eget nunc scelerisque. Lacinia at quis risus sed vulputate odio. Cras tincidunt lobortis feugiat vivamus. Amet commodo nulla facilisi nullam vehicula ipsum a arcu. Vel elit scelerisque mauris pellentesque. Facilisi nullam vehicula ipsum a arcu cursus. Urna duis convallis convallis tellus id interdum velit. Turpis in eu mi bibendum neque. Nunc mi ipsum faucibus vitae aliquet nec ullamcorper. Erat nam at lectus urna. Eleifend donec pretium vulputate sapien nec sagittis aliquam malesuada bibendum. Sed ullamcorper morbi tincidunt ornare massa eget egestas purus. Interdum velit euismod in pellentesque massa. Blandit volutpat maecenas volutpat blandit aliquam etiam erat. Nunc congue nisi vitae suscipit tellus mauris a diam. Volutpat blandit aliquam etiam erat velit scelerisque in dictum. Volutpat consequat mauris nunc congue nisi vitae. Amet tellus cras adipiscing enim eu turpis egestas pretium. Ligula ullamcorper malesuada proin libero nunc. Odio ut enim blandit volutpat maecenas. Turpis tincidunt id aliquet risus feugiat in ante metus. Enim nulla aliquet porttitor lacus. Fermentum posuere urna nec tincidunt praesent semper feugiat nibh sed. Turpis egestas maecenas pharetra convallis posuere morbi leo urna. Eget gravida cum sociis natoque. Diam maecenas sed enim ut. Mollis nunc sed id semper risus in. Libero enim sed faucibus turpis. Consectetur adipiscing elit ut aliquam purus sit amet. Nulla aliquet enim tortor at auctor urna. Vulputate enim nulla aliquet porttitor. Tellus rutrum tellus pellentesque eu tincidunt tortor aliquam. Arcu ac tortor dignissim convallis aenean et tortor. Amet tellus cras adipiscing enim eu turpis. A lacus vestibulum sed arcu non odio. Nulla aliquet enim tortor at auctor urna nunc id. Quis viverra nibh cras pulvinar mattis nunc sed blandit libero. Egestas egestas fringilla phasellus fau.</div>            
+                <div className="view-title">{props[0].data.data.diaryentry[id].title}</div>
+                <div className="view-date">{moment(props[0].data.data.diaryentry[id].date).format("dddd, MMMM Do YYYY, h:mm:ss a")}</div>
+                <div className="view-data">{props[0].data.data.diaryentry[id].entry}</div>            
             </div>
         </div>
     )

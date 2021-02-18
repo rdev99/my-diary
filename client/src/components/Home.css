@@ -30,6 +30,10 @@
     font-size: 50px;
     color: rgb(103, 189, 189);
 }
+.text-value1 {
+    font-size: 35px;
+    color: rgb(82, 173, 112);
+}
 .btn-submit {
     margin-left: 250px;
     border-radius: 7px;

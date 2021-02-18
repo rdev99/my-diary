@@ -17,9 +17,9 @@ function Login(...props) {
                 password : password
             }).then(function(response) {
                 // console.log(response);
-                if(response.data==='Login')
+                if(response.status===200)
                 {
-                    props[0].login(loginid);
+                    props[0].login(response);
                 }
                 else
                 {

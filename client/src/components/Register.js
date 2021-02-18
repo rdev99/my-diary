@@ -19,9 +19,9 @@ function Register(...props) {
                 password : password
             }).then(function(response) {
                 // console.log(response);
-                if(response.data==='Registered')
+                if(response.status===201)
                 {
-                    props[0].login(username);
+                    props[0].login(response);
                 }
             }).catch(err => {
                 console.log(err);

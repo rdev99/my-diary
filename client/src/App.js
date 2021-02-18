@@ -13,16 +13,14 @@ import Register from './components/Register';
 
 
 function Activelogin(...props) {
-  const [data,setdata]=useState({});
-  
   return (
     <Router>
         <Navbar/>
         <Switch>
-          <Route path="/" exact><Home user={props[0].user}></Home></Route>
-          <Route path="/create"><Newentry user={props[0].user}></Newentry></Route>
-          <Route path="/view" exact><Viewmenu user={props[0].user}></Viewmenu></Route>
-          <Route path="/view/:id"><Viewentry user={props[0].user}></Viewentry></Route>
+          <Route path="/" exact><Home data={props[0].data}></Home></Route>
+          <Route path="/create"><Newentry data={props[0].data} login={props[0].login}></Newentry></Route>
+          <Route path="/view" exact><Viewmenu data={props[0].data}></Viewmenu></Route>
+          <Route path="/view/:id"><Viewentry data={props[0].data}></Viewentry></Route>
           <Redirect to="/"></Redirect>
         </Switch>
       </Router>
@@ -44,14 +42,15 @@ function NotActivelogin(...props) {
 
 function App() {
   const [login,setlogin] = useState(false);
-  const [userid,setuserid] = useState('as');
+  const [data,setdata]=useState({})
 
-  const logind = (user) => {
+  const logind = (data) => {
+    
+    setdata(prev => {
+      return data;
+    });
     setlogin(prev => {
       return true;
-    })
-    setuserid(prev => {
-      return user;
     });
   }
 
@@ -59,7 +58,7 @@ function App() {
   {
     return (
       <div className="app">
-          <Activelogin user={userid}/>
+          <Activelogin data={data} login={logind}/>
       </div>
     );
   }
