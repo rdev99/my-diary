@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState , useEffect } from 'react';
 import './App.css';
 import Navbar from './components/common/Navbar';
 import {BrowserRouter as Router,Route,Switch,Redirect} from 'react-router-dom';
@@ -15,7 +15,7 @@ import Register from './components/Register';
 function Activelogin(...props) {
   return (
     <Router>
-        <Navbar/>
+        <Navbar logout={props[0].logout}/>
         <Switch>
           <Route path="/" exact><Home data={props[0].data}></Home></Route>
           <Route path="/create"><Newentry data={props[0].data} login={props[0].login}></Newentry></Route>
@@ -45,7 +45,8 @@ function App() {
   const [data,setdata]=useState({})
 
   const logind = (data) => {
-    
+    localStorage.setItem('login',"true")
+    localStorage.setItem('data',JSON.stringify(data));
     setdata(prev => {
       return data;
     });
@@ -54,11 +55,33 @@ function App() {
     });
   }
 
+  const logoutd = () => {
+    localStorage.setItem('login',"false")
+    localStorage.setItem('data',JSON.stringify({}))
+    setlogin(prev => {
+      return false;
+    })
+  }
+  useEffect(() => {
+    if(localStorage.getItem('login')!=null)
+    {
+      if(localStorage.getItem('login')==="true")
+      {
+        setdata(prev => {
+          return JSON.parse(localStorage.getItem('data'));
+        });
+        setlogin(prev => {
+          return true;
+        });
+      }
+    }
+  },[])
+
   if(login)
   {
     return (
       <div className="app">
-          <Activelogin data={data} login={logind}/>
+          <Activelogin data={data} logout={logoutd} login={logind}/>
       </div>
     );
   }

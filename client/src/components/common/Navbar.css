@@ -16,3 +16,15 @@
 .nav-active {
     background-color: rgb(1, 78, 1);
 }
+.nav-button {
+    margin-left: 70%;
+    background-color: transparent;
+    text-shadow: none;
+    box-shadow: none;
+    border: none;
+    color: blanchedalmond;
+}
+.nav-button:hover {
+    background-color: #ddd;
+    color: black;
+}
