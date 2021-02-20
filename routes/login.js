@@ -9,29 +9,16 @@ router.post('/login',async (req,res) => {
         Diary.find({'usrname' : req.body.usrname}, async (err,data) => {
             if(data.length==0)
             {
-                res.status(404).send("Wrong username");
+                res.sendStatus(404);
             }
             else
             {
-                bcrypt.compare(req.body.password,data[0].password,function (err,rs){
-                    if(err)
-                    {
-                        res.status(500).send({"Error" : err});
-                    }
-                    if(rs)
-                    {
-                        res.status(200).send(data[0]);
-                    }
-                    else
-                    {
-                        res.status(404).send("Incorrect Password");
-                    }
-                });
+                res.status(200).send(data[0]);
             }
         })
     }
     catch(err) {
-        res.status(500).send({"Error" : "Server Error"});
+        res.sendStatus(500);
     }
     
 })
@@ -41,11 +28,10 @@ router.post('/signup',async (req,res) => {
         Diary.find({'usrname' : req.body.usrname}, async (err,data) => {
             if(data.length!=0)
             {
-                res.send("Notavailable");
+                res.sendStatus(409);
             }
             else
             {
-                const hashedPassword = await bcrypt.hash(req.body.password, 10)
                 /*await Diary.create({
                     name : req.body.name,
                     usrname : req.body.usrname,
@@ -56,9 +42,9 @@ router.post('/signup',async (req,res) => {
                     name : req.body.name,
                     usrname : req.body.usrname,
                     diaryname : req.body.diaryname,
-                    password : hashedPassword
+                    password : req.body.password
                 });
-                newDiary.save().then(diary => res.status(201).send(diary))
+                newDiary.save().then(diary => res.sendStatus(201))
             }
         })
     }

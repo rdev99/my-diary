@@ -1,30 +1,39 @@
 import { useState } from 'react';
 import axios from 'axios';
 import './Register.css';
+import bcrypt from 'bcryptjs';
+import { useHistory } from 'react-router-dom'
 
 function Register(...props) {
+    const history = useHistory();
     // console.log(props[0].login);
     const [username,setusername] = useState('');
     const [name,setname] = useState('');
     const [diary,setdiary] = useState('');
     const [password,setpassword] = useState('');
     const [repassword,setrepassword] = useState('');
-    function register() {
+    async function register() {
         if(password===repassword)
         {
+            const hashedPassword = await bcrypt.hash(password,10)
             axios.post('http://localhost:5000/signup',{
                 usrname : username,
                 name : name,
                 diaryname : diary,
-                password : password
+                password : hashedPassword
             }).then(function(response) {
                 // console.log(response);
                 if(response.status===201)
                 {
-                    props[0].login(response);
+                    alert('Account successfully created , You can login now')
+                    history.push('/login')
                 }
             }).catch(err => {
-                console.log(err);
+                if(err.response.status===409)
+                {
+                    alert('username taken')
+                    
+                }
             })
         }
         else
