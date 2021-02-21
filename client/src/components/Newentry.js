@@ -2,8 +2,10 @@ import './Newentry.css';
 import { useState } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import url from './../configurl/url';
 
 function Newentry(...props) {
+    const url1 = url + '/diary/'
     const history = useHistory();
     const [title,settitle] = useState('');
     const [entry,setentry] = useState('');
@@ -13,7 +15,7 @@ function Newentry(...props) {
             entry
         }
         let username = props[0].data.data.usrname;
-        let url='http://localhost:5000/diary/'+username;
+        let url=url1+username;
         axios.post(url,data).then(function(response) {
             if(response.status===201)
             {

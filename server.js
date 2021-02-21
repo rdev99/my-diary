@@ -12,7 +12,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({extended : false}));
 app.use(bodyParser.json());
 
-const port = 5000;
+const port = 8082;
 
 const db = 'mongodb://localhost:27017/diary';
 

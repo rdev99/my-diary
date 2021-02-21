@@ -2,9 +2,11 @@ import { useState } from 'react';
 import axios from 'axios';
 import './Login.css';
 import bcrypt from 'bcryptjs';
+import url from './../configurl/url'
 function Login(...props) {
     const [loginid,setloginid] = useState('');
     const [password,setpassword] = useState('');
+    let url1 = url + '/login';
     // console.log(props[0].login);
     async function login() {
         if(password === '')
@@ -13,7 +15,7 @@ function Login(...props) {
         }
         else
         {
-            axios.post('http://localhost:5000/login',{
+            axios.post(url1,{
                 usrname : loginid
             }).then(function(response) {
                 // console.log(response);
